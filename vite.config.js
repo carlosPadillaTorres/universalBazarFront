@@ -7,6 +7,7 @@ export default defineConfig({
    server: {
     host: true,
     port: process.env.PORT || 1212,
+    allowedHosts: true,
   },
   preview: {
     host: true,
