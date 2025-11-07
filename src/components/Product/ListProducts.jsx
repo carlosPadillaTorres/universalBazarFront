@@ -1,4 +1,5 @@
 import { Container, Row, Col, Card } from 'react-bootstrap';
+import { navigate } from '../../utils/navigation'
 import './ListProducts.css';
 
 /**
@@ -35,12 +36,12 @@ const ListProducts = ({ products, searchTerm = false }) => {
             {/* Grid de productos */}
             <Row xs={1} sm={2} md={3} lg={4} className="g-4">
                 {products.map(product => (
-                    <Col key={product.id}>
-                        <Card className="product-card h-100 shadow-sm">
+                    <Col key={product.id || product._id}>
+                        <Card className="product-card h-100 shadow-sm" role="button" onClick={() => navigate(`/item/${product.id}`)}>
                             {/* Imagen del producto */}
                             <Card.Img 
                                 variant="top" 
-                                src={product.image || 'https://via.placeholder.com/300x200?text=Sin+Imagen'} 
+                                src={product.images[0] || 'https://via.placeholder.com/300x200?text=Sin+Imagen'} 
                                 alt={product.name}
                                 className="product-image"
                             />
@@ -48,7 +49,7 @@ const ListProducts = ({ products, searchTerm = false }) => {
                             <Card.Body className="d-flex flex-column">
                                 {/* Nombre del producto */}
                                 <Card.Title className="product-title">
-                                    {product.name}
+                                    {product.name || product.title || product.nombre}
                                 </Card.Title>
                                 
                                 {/* Descripción */}

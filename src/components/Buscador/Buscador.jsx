@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
-import { Container, Alert } from "react-bootstrap"
+import { Container, Alert, Button } from "react-bootstrap"
 import { ProductsService } from "../../services/products.service"
 import SearchBar from "../SearchBar/SearchBar"
 import ListProducts from "../Product/ListProducts"
+import { navigate, getSearchParam } from '../../utils/navigation'
 import "./Buscador.css"
 
 
@@ -30,8 +31,13 @@ const Buscador = () => {
       try {
         const products = await prodObject.getAllProducts()
         setAllProducts(products)
-  console.log('Productos cargados en Buscador:', products && products.length ? products.slice(0,3) : products)
+        console.log('Productos cargados en Buscador:', products && products.length ? products.slice(0,3) : products)
         setLoading(false)
+        // Si la URL trae un parámetro `search`, ejecutar la búsqueda automáticamente
+        const initialSearch = getSearchParam('search')
+        if (initialSearch) {
+          handleSearch(initialSearch)
+        }
       } catch (error) {
         setAlertError(true);
         console.error("Error cargando productos:", error)
@@ -51,12 +57,16 @@ const Buscador = () => {
     // Convertir el término de búsqueda a minúsculas para comparación
     const term = searchTerm.toLowerCase()
     
-    // Filtrar productos que contengan el término en su nombre
-    const filtered = allProducts.filter(product => 
-      product.name.toLowerCase().includes(term)
-    )
-    
+    // Filtrar productos que contengan el término en su nombre o descripción
+    const filtered = allProducts.filter(product => {
+      const name = (product.name || product.title || product.nombre || '').toString().toLowerCase()
+      const description = (product.description || product.descripcion || '').toString().toLowerCase()
+      return name.includes(term) || description.includes(term)
+    })
+
     setFilteredProducts(filtered)
+    // Actualizar URL para que muestre /items?search=...
+    navigate(`/items?search=${encodeURIComponent(searchTerm)}`)
   }
 
   return (
@@ -70,6 +80,9 @@ const Buscador = () => {
         />
         <h1 className="app-title">Bazar Universal</h1>
         <p className="app-subtitle">Encuentra todo lo que necesitas</p>
+        <div className="d-flex justify-content-center mt-3">
+          <Button variant="outline-primary" onClick={() => navigate('/sales')}>Mis compras</Button>
+        </div>
       </Container>
 
       {/* Barra de búsqueda */}
