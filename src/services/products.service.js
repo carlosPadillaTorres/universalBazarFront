@@ -9,9 +9,10 @@ export class ProductsService {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const data = response.json();
+      // Esperar a que se resuelva la promesa de .json() para obtener los datos reales
+      const data = await response.json();
       console.log("Data recibida en getAllProducts:", data);
-      return await data;
+      return data;
     } catch (error) {
       console.error('Error fetching products:', error);
       throw error;
