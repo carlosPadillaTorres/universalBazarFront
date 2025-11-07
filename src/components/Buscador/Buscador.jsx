@@ -5,16 +5,7 @@ import SearchBar from "../SearchBar/SearchBar"
 import ListProducts from "../Product/ListProducts"
 import "./Buscador.css"
 
-/**
- * Componente Buscador
- * 
- * Este es el componente principal de la página de inicio.
- * Muestra:
- * - Logo de la aplicación
- * - Título
- * - Barra de búsqueda
- * - Lista de productos (todos o filtrados según la búsqueda)
- */
+
 const Buscador = () => {
   // Instancia del servicio de productos
   const prodObject = new ProductsService()
