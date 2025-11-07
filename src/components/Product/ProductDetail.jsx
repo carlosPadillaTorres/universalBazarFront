@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { Container, Row, Col, Button, Alert, Carousel, Card, Spinner } from 'react-bootstrap'
 import { ProductsService } from '../../services/products.service'
 import { navigate } from '../../utils/navigation'
 import { SalesService } from '../../services/sales.service'
 
-const ProductDetail = ({ id }) => {
+const ProductDetail = ({ id: propId }) => {
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [successMsg, setSuccessMsg] = useState(null)
   const [registering, setRegistering] = useState(false)
+  const params = useParams()
+  const id = propId || params.id
 
   useEffect(() => {
     const svc = new ProductsService()

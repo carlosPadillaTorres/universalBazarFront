@@ -44,7 +44,10 @@ const SalesList = () => {
 
   return (
     <Container className="py-4">
-      <h2>Compras registradas</h2>
+      <div className="d-flex align-items-center justify-content-between mb-3">
+        <h2 className="m-0">Compras registradas</h2>
+        <Button variant="outline-primary" onClick={() => navigate('/')}>Volver al inicio</Button>
+      </div>
       <Row className="g-3">
         {sales.map(sale => (
           <Col xs={12} md={6} lg={4} key={sale.saleId}>
