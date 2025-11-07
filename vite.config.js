@@ -27,6 +27,13 @@ export default defineConfig({
       short_name: 'Universal bazar',
       description: 'Bazar con todo tipo de productos. La app será web, pero se enfocará en móviles',
       theme_color: '#ffffff',
+      icons: [
+        {
+          src: '/logo_bazar_icono.png',
+          sizes: '192x192',
+          type: 'image/png',
+        }
+      ],
     },
 
     workbox: {

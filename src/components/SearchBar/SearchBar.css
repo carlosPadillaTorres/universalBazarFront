@@ -1,0 +1,44 @@
+/* SearchBar Styles - Mobile First */
+
+.search-bar-container {
+  max-width: 100%;
+  padding: 0 1rem;
+}
+
+/* Estilos para el input de búsqueda */
+.search-input {
+  border-right: none;
+  font-size: 1rem;
+}
+
+.search-input:focus {
+  border-color: #0d6efd;
+  box-shadow: none;
+}
+
+/* Estilos para el botón de búsqueda */
+.search-button {
+  white-space: nowrap;
+  font-weight: 600;
+  min-width: 100px;
+}
+
+/* Tablets y pantallas más grandes (768px en adelante) */
+@media (min-width: 768px) {
+  .search-bar-container {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .search-button {
+    min-width: 120px;
+  }
+}
+
+/* Desktop (992px en adelante) */
+@media (min-width: 992px) {
+  .search-bar-container {
+    max-width: 700px;
+  }
+}
